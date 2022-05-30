@@ -28,12 +28,11 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: ['id', 'category_name'],
       // be sure to include its associated Products
     include: [
       {
         model: Product,
-        attributes: ['product_name', 'price', 'stock']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
       }
     ]
   })
@@ -64,10 +63,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
-  Category.update(
-    {
-    category_name: req.body.category_name
-    },
+  Category.update(req.body,
     {
       where: {
         id: req.params.id
