@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     // be sure to include its associated Product data
     include: [{
       model: Product,
-      attributes: ['product_id']
+      attributes: ['id', 'product_name']
     }]
   })
   .then(dbTagData => res.json(dbTagData))
@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Product,
-        attributes: ['product_id']
+        attributes: ['id', 'product_name']
       }
     ]
   })
@@ -53,7 +53,7 @@ router.post('/', (req, res) => {
   Tag.create({
     tag_name: req.body.tag_name,
   })
-  .then(dbCategoryData => res.json(dbTagData))
+  .then(dbTagData => res.json(dbTagData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
