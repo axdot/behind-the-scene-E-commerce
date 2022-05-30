@@ -8,16 +8,16 @@ router.get('/', (req, res) => {
   // find all products
   
   Product.findAll({
-    attributes: ['product_name', 'price', 'stock', 'tagIds'],
+    attributes: ['id', 'product_name', 'price', 'stock', 'category_id'],
     // be sure to include its associated Category and Tag data
     include: [
       {
         model: Category,
-        attributes: ['tagIDs']
+        attributes: ['id', 'category_name']
       },
       {
-        model: ProductTag,
-        attributes: ['tagIDs']
+        model: Tag,
+        attributes: ['id', 'tag_name']
       }
     ]
   })
@@ -42,8 +42,8 @@ router.get('/:id', (req, res) => {
       attributes: ['category_name']
     },
     {
-      model: ProductTag,
-      attributes: [tagIds]
+      model: Tag,
+      attributes: ['id', 'tag_name']
     }
   ]
   })
